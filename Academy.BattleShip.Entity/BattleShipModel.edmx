@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BattleShipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GameHits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="ShipCellId" Type="int" />
+          <Property Name="X_Pos" Type="tinyint" Nullable="false" />
+          <Property Name="Y_Pos" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapShips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="ShipType" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerGames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId1" Type="int" Nullable="false" />
+          <Property Name="PlayerId2" Type="int" Nullable="false" />
+          <Property Name="Start_DT" Type="datetime" Nullable="false" />
+          <Property Name="End_DT" Type="datetime" />
+          <Property Name="QtyHits" Type="tinyint" Nullable="false" />
+          <Property Name="QtySuccessfullHits" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Players">
+          <Key>
+            <PropertyRef Name="IdPlayer" />
+          </Key>
+          <Property Name="IdPlayer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecretKey" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="isRegistered" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerShips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="ShipTypeId" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShipCells">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShipId" Type="int" Nullable="false" />
+          <Property Name="X_Pos" Type="tinyint" />
+          <Property Name="Y_Pos" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_GameHits_PlayerGames">
+          <End Role="PlayerGames" Type="Self.PlayerGames" Multiplicity="1" />
+          <End Role="GameHits" Type="Self.GameHits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerGames">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameHits">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameHits_ShipCells">
+          <End Role="ShipCells" Type="Self.ShipCells" Multiplicity="0..1" />
+          <End Role="GameHits" Type="Self.GameHits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipCells">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameHits">
+              <PropertyRef Name="ShipCellId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapShips_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="MapShips" Type="Self.MapShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="MapShips">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGames_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="PlayerGames" Type="Self.PlayerGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerGames">
+              <PropertyRef Name="PlayerId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGames_Players1">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="PlayerGames" Type="Self.PlayerGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerGames">
+              <PropertyRef Name="PlayerId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerShips_Players">
+          <End Role="Players" Type="Self.Players" Multiplicity="1" />
+          <End Role="PlayerShips" Type="Self.PlayerShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerShips">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShipCells_MapShips">
+          <End Role="MapShips" Type="Self.MapShips" Multiplicity="1" />
+          <End Role="ShipCells" Type="Self.ShipCells" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapShips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShipCells">
+              <PropertyRef Name="ShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BattleShipModelStoreContainer">
+          <EntitySet Name="GameHits" EntityType="Self.GameHits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapShips" EntityType="Self.MapShips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerGames" EntityType="Self.PlayerGames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerShips" EntityType="Self.PlayerShips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShipCells" EntityType="Self.ShipCells" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GameHits_PlayerGames" Association="Self.FK_GameHits_PlayerGames">
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+            <End Role="GameHits" EntitySet="GameHits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameHits_ShipCells" Association="Self.FK_GameHits_ShipCells">
+            <End Role="ShipCells" EntitySet="ShipCells" />
+            <End Role="GameHits" EntitySet="GameHits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapShips_Players" Association="Self.FK_MapShips_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="MapShips" EntitySet="MapShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGames_Players" Association="Self.FK_PlayerGames_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGames_Players1" Association="Self.FK_PlayerGames_Players1">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerShips_Players" Association="Self.FK_PlayerShips_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerShips" EntitySet="PlayerShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShipCells_MapShips" Association="Self.FK_ShipCells_MapShips">
+            <End Role="MapShips" EntitySet="MapShips" />
+            <End Role="ShipCells" EntitySet="ShipCells" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BattleShipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GameHit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <Property Name="ShipCellId" Type="Int32" />
+          <Property Name="X_Pos" Type="Byte" Nullable="false" />
+          <Property Name="Y_Pos" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="PlayerGame" Relationship="Self.FK_GameHits_PlayerGames" FromRole="GameHits" ToRole="PlayerGames" />
+          <NavigationProperty Name="ShipCell" Relationship="Self.FK_GameHits_ShipCells" FromRole="GameHits" ToRole="ShipCells" />
+        </EntityType>
+        <EntityType Name="MapShip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="ShipType" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_MapShips_Players" FromRole="MapShips" ToRole="Players" />
+          <NavigationProperty Name="ShipCells" Relationship="Self.FK_ShipCells_MapShips" FromRole="MapShips" ToRole="ShipCells" />
+        </EntityType>
+        <EntityType Name="PlayerGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId1" Type="Int32" Nullable="false" />
+          <Property Name="PlayerId2" Type="Int32" Nullable="false" />
+          <Property Name="Start_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End_DT" Type="DateTime" Precision="3" />
+          <Property Name="QtyHits" Type="Byte" Nullable="false" />
+          <Property Name="QtySuccessfullHits" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="GameHits" Relationship="Self.FK_GameHits_PlayerGames" FromRole="PlayerGames" ToRole="GameHits" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerGames_Players" FromRole="PlayerGames" ToRole="Players" />
+          <NavigationProperty Name="Player1" Relationship="Self.FK_PlayerGames_Players1" FromRole="PlayerGames" ToRole="Players" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="IdPlayer" />
+          </Key>
+          <Property Name="IdPlayer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecretKey" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="isRegistered" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MapShips" Relationship="Self.FK_MapShips_Players" FromRole="Players" ToRole="MapShips" />
+          <NavigationProperty Name="PlayerGames" Relationship="Self.FK_PlayerGames_Players" FromRole="Players" ToRole="PlayerGames" />
+          <NavigationProperty Name="PlayerGames1" Relationship="Self.FK_PlayerGames_Players1" FromRole="Players" ToRole="PlayerGames" />
+          <NavigationProperty Name="PlayerShips" Relationship="Self.FK_PlayerShips_Players" FromRole="Players" ToRole="PlayerShips" />
+        </EntityType>
+        <EntityType Name="PlayerShip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="ShipTypeId" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.FK_PlayerShips_Players" FromRole="PlayerShips" ToRole="Players" />
+        </EntityType>
+        <EntityType Name="ShipCell">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShipId" Type="Int32" Nullable="false" />
+          <Property Name="X_Pos" Type="Byte" />
+          <Property Name="Y_Pos" Type="Byte" />
+          <NavigationProperty Name="GameHits" Relationship="Self.FK_GameHits_ShipCells" FromRole="ShipCells" ToRole="GameHits" />
+          <NavigationProperty Name="MapShip" Relationship="Self.FK_ShipCells_MapShips" FromRole="ShipCells" ToRole="MapShips" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_GameHits_PlayerGames">
+          <End Role="PlayerGames" Type="Self.PlayerGame" Multiplicity="1" />
+          <End Role="GameHits" Type="Self.GameHit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerGames">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameHits">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameHits_ShipCells">
+          <End Role="ShipCells" Type="Self.ShipCell" Multiplicity="0..1" />
+          <End Role="GameHits" Type="Self.GameHit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipCells">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameHits">
+              <PropertyRef Name="ShipCellId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapShips_Players">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="MapShips" Type="Self.MapShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="MapShips">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShipCells_MapShips">
+          <End Role="MapShips" Type="Self.MapShip" Multiplicity="1" />
+          <End Role="ShipCells" Type="Self.ShipCell" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapShips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShipCells">
+              <PropertyRef Name="ShipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGames_Players">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerGames" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerGames">
+              <PropertyRef Name="PlayerId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGames_Players1">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerGames" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerGames">
+              <PropertyRef Name="PlayerId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerShips_Players">
+          <End Role="Players" Type="Self.Player" Multiplicity="1" />
+          <End Role="PlayerShips" Type="Self.PlayerShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Players">
+              <PropertyRef Name="IdPlayer" />
+            </Principal>
+            <Dependent Role="PlayerShips">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BattleShipEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GameHits" EntityType="Self.GameHit" />
+          <EntitySet Name="MapShips" EntityType="Self.MapShip" />
+          <EntitySet Name="PlayerGames" EntityType="Self.PlayerGame" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="PlayerShips" EntityType="Self.PlayerShip" />
+          <EntitySet Name="ShipCells" EntityType="Self.ShipCell" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_GameHits_PlayerGames" Association="Self.FK_GameHits_PlayerGames">
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+            <End Role="GameHits" EntitySet="GameHits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameHits_ShipCells" Association="Self.FK_GameHits_ShipCells">
+            <End Role="ShipCells" EntitySet="ShipCells" />
+            <End Role="GameHits" EntitySet="GameHits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapShips_Players" Association="Self.FK_MapShips_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="MapShips" EntitySet="MapShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShipCells_MapShips" Association="Self.FK_ShipCells_MapShips">
+            <End Role="MapShips" EntitySet="MapShips" />
+            <End Role="ShipCells" EntitySet="ShipCells" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGames_Players" Association="Self.FK_PlayerGames_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGames_Players1" Association="Self.FK_PlayerGames_Players1">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerGames" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerShips_Players" Association="Self.FK_PlayerShips_Players">
+            <End Role="Players" EntitySet="Players" />
+            <End Role="PlayerShips" EntitySet="PlayerShips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BattleShipModelStoreContainer" CdmEntityContainer="BattleShipEntities">
+          <EntitySetMapping Name="GameHits">
+            <EntityTypeMapping TypeName="BattleShipModel.GameHit">
+              <MappingFragment StoreEntitySet="GameHits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="ShipCellId" ColumnName="ShipCellId" />
+                <ScalarProperty Name="X_Pos" ColumnName="X_Pos" />
+                <ScalarProperty Name="Y_Pos" ColumnName="Y_Pos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapShips">
+            <EntityTypeMapping TypeName="BattleShipModel.MapShip">
+              <MappingFragment StoreEntitySet="MapShips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerGames">
+            <EntityTypeMapping TypeName="BattleShipModel.PlayerGame">
+              <MappingFragment StoreEntitySet="PlayerGames">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlayerId1" ColumnName="PlayerId1" />
+                <ScalarProperty Name="PlayerId2" ColumnName="PlayerId2" />
+                <ScalarProperty Name="Start_DT" ColumnName="Start_DT" />
+                <ScalarProperty Name="End_DT" ColumnName="End_DT" />
+                <ScalarProperty Name="QtyHits" ColumnName="QtyHits" />
+                <ScalarProperty Name="QtySuccessfullHits" ColumnName="QtySuccessfullHits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="BattleShipModel.Player">
+              <MappingFragment StoreEntitySet="Players">
+                <ScalarProperty Name="IdPlayer" ColumnName="IdPlayer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+                <ScalarProperty Name="isRegistered" ColumnName="isRegistered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerShips">
+            <EntityTypeMapping TypeName="BattleShipModel.PlayerShip">
+              <MappingFragment StoreEntitySet="PlayerShips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="ShipTypeId" ColumnName="ShipTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShipCells">
+            <EntityTypeMapping TypeName="BattleShipModel.ShipCell">
+              <MappingFragment StoreEntitySet="ShipCells">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="X_Pos" ColumnName="X_Pos" />
+                <ScalarProperty Name="Y_Pos" ColumnName="Y_Pos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BattleShipModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
