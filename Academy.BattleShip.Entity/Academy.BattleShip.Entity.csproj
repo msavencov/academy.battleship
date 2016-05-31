@@ -51,69 +51,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattleShipEntities.cs" />
-    <Compile Include="BattleShipModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BattleShipModel.Context.tt</DependentUpon>
+    <Compile Include="Migrations\201605311946050_Initial.cs" />
+    <Compile Include="Migrations\201605311946050_Initial.Designer.cs">
+      <DependentUpon>201605311946050_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="BattleShipModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BattleShipModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BattleShipModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="GameHit.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MapShip.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Player.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerGame.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PlayerShip.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\BattleShipEntities.cs" />
+    <Compile Include="Model\Extensions.cs" />
+    <Compile Include="Model\HitResult.cs" />
+    <Compile Include="Model\GameHits.cs" />
+    <Compile Include="Model\MapShip.cs" />
+    <Compile Include="Model\PlayerGames.cs" />
+    <Compile Include="Model\Players.cs" />
+    <Compile Include="Model\PlayerShips.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShipCell.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>BattleShipModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\ShipCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="BattleShipModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BattleShipModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="BattleShipModel.edmx.diagram">
-      <DependentUpon>BattleShipModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BattleShipModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BattleShipModel.edmx</DependentUpon>
-      <LastGenOutput>BattleShipModel.Context.cs</LastGenOutput>
+    <EmbeddedResource Include="Migrations\201605311946050_Initial.resx">
+      <DependentUpon>201605311946050_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StoredProcedures\spGameHit.1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BattleShipModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BattleShipModel.edmx</DependentUpon>
-      <LastGenOutput>BattleShipModel.cs</LastGenOutput>
+    <Content Include="StoredProcedures\spGameHit.0.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
