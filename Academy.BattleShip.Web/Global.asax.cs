@@ -3,6 +3,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Http;
+using System.Web.Optimization;
+using Academy.BattleShip.Web.App_Start;
 
 namespace Academy.BattleShip.Web
 {
@@ -14,7 +16,8 @@ namespace Academy.BattleShip.Web
             AreaRegistration.RegisterAllAreas();
             //UnityConfig.RegisterComponents();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
