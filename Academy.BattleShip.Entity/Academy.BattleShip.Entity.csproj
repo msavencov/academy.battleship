@@ -52,22 +52,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleShipEntities.cs" />
+    <Compile Include="Migrations\201606091948440_Current3.cs" />
+    <Compile Include="Migrations\201606091948440_Current3.Designer.cs">
+      <DependentUpon>201606091948440_Current3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Game.cs" />
     <Compile Include="Model\KeyPool.cs" />
     <Compile Include="Migrations\201606041757389_Initial.cs" />
     <Compile Include="Migrations\201606041757389_Initial.Designer.cs">
       <DependentUpon>201606041757389_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606041901111_Current1.cs" />
-    <Compile Include="Migrations\201606041901111_Current1.Designer.cs">
-      <DependentUpon>201606041901111_Current1.cs</DependentUpon>
+    <Compile Include="Migrations\201606041901111_Current.cs" />
+    <Compile Include="Migrations\201606041901111_Current.Designer.cs">
+      <DependentUpon>201606041901111_Current.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606041947298_Current2.cs" />
-    <Compile Include="Migrations\201606041947298_Current2.Designer.cs">
-      <DependentUpon>201606041947298_Current2.cs</DependentUpon>
+    <Compile Include="Migrations\201606041947298_Current1.cs" />
+    <Compile Include="Migrations\201606041947298_Current1.Designer.cs">
+      <DependentUpon>201606041947298_Current1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606081814586_Current3.cs" />
-    <Compile Include="Migrations\201606081814586_Current3.Designer.cs">
-      <DependentUpon>201606081814586_Current3.cs</DependentUpon>
+    <Compile Include="Migrations\201606081814586_Current2.cs" />
+    <Compile Include="Migrations\201606081814586_Current2.Designer.cs">
+      <DependentUpon>201606081814586_Current2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Player.cs" />
@@ -86,14 +91,17 @@
     <EmbeddedResource Include="Migrations\201606041757389_Initial.resx">
       <DependentUpon>201606041757389_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606041901111_Current1.resx">
-      <DependentUpon>201606041901111_Current1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606041901111_Current.resx">
+      <DependentUpon>201606041901111_Current.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606041947298_Current2.resx">
-      <DependentUpon>201606041947298_Current2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606041947298_Current1.resx">
+      <DependentUpon>201606041947298_Current1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606081814586_Current3.resx">
-      <DependentUpon>201606081814586_Current3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606081814586_Current2.resx">
+      <DependentUpon>201606081814586_Current2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606091948440_Current3.resx">
+      <DependentUpon>201606091948440_Current3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

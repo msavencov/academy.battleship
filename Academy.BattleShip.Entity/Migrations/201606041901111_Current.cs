@@ -3,7 +3,7 @@ namespace Academy.BattleShip.Entity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Current1 : DbMigration
+    public partial class Current : DbMigration
     {
         public override void Up()
         {

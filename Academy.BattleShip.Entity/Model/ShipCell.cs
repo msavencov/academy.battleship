@@ -19,8 +19,7 @@ namespace Academy.BattleShip.Entity.Model
 
         public int X { get; set; }
         public int Y { get; set; }
-        
-        [ForeignKey(nameof(PlayerId))]
+
         public virtual Player Player { get; set; }
     }
 }
