@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Academy.BattleShip.Entity.Model
+namespace Academy.BattleShip.Entity.Models
 {
     public class KeyPool
     {

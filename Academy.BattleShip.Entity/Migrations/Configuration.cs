@@ -1,5 +1,4 @@
 using System.Data.Entity.Migrations;
-using Academy.BattleShip.Entity.Model;
 
 namespace Academy.BattleShip.Entity.Migrations
 {

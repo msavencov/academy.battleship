@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Academy.BattleShip.Entity.Model;
+using Academy.BattleShip.Entity.Models;
 
 //Enable-Migrations -ProjectName 'Academy.BattleShip.Entity' -ContextTypeName 'Academy.BattleShip.Entity.Model.BattleShipEntities' -ConnectionStringName 'BattleShipEntities' -EnableAutomaticMigrations
 //Add-Migration Current -ProjectName 'Academy.BattleShip.Entity' -ConfigurationTypeName 'Academy.BattleShip.Entity.Migrations.Configuration' -ConnectionStringName 'BattleShipEntities'

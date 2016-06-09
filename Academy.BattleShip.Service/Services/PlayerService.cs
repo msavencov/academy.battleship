@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 using Academy.BattleShip.Entity;
-using Academy.BattleShip.Entity.Model;
+using Academy.BattleShip.Entity.Models;
 using Academy.BattleShip.Service.Models;
 using Player = Academy.BattleShip.Service.Models.Player;
 
@@ -38,7 +38,7 @@ namespace Academy.BattleShip.Service.Services
                 .Except(_entities.Players.Select(t => t.Key))
                 .OrderBy(t => Guid.NewGuid()).FirstOrDefault();
 
-            var player = new Entity.Model.Player
+            var player = new Entity.Models.Player
             {
                 Key = key,
                 Name = name
