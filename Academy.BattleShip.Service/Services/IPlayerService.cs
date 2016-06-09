@@ -2,7 +2,7 @@
 using System.Drawing;
 using Academy.BattleShip.Service.Models;
 
-namespace Academy.BattleShip.Service
+namespace Academy.BattleShip.Service.Services
 {
     public interface IPlayerService : IService
     {

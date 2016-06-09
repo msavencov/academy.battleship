@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Data.Odbc;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using Academy.BattleShip.Entity;
 using Academy.BattleShip.Entity.Model;
 using Academy.BattleShip.Service.Models;
 using Player = Academy.BattleShip.Service.Models.Player;
 
-namespace Academy.BattleShip.Service
+namespace Academy.BattleShip.Service.Services
 {
     public partial class PlayerService : IPlayerService
     {
