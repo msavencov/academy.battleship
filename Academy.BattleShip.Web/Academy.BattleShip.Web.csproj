@@ -309,6 +309,7 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="Content\Images\Coming-Soon.png" />
     <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Map.js" />
@@ -453,6 +454,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\e365aab7-0ee0-4-231-b9ee - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\e365aab7-0ee0-4-231-b9ee - Web Deploy.pubxml" />
+    <Content Include="Views\Admin\Stats.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

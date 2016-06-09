@@ -6,7 +6,7 @@ namespace Academy.BattleShip.Web.Controllers
     {
         public ActionResult Stats()
         {
-            throw new System.NotImplementedException();
+            return View();
         }
     }
 }
