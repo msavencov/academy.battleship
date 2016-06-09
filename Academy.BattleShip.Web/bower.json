@@ -1,5 +1,6 @@
 {
-  "name": "AcademyPlus",
+  "name": "academy-battleship",
+  "private": true,
   "dependencies": {
     "bootstrap": "3.3.6"
   }

@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,14 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameService.cs" />
-    <Compile Include="IGameService.cs">
-      <DependentUpon>GameService.cs</DependentUpon>
-    </Compile>
     <Compile Include="IPlayerService.cs">
       <DependentUpon>PlayerService.cs</DependentUpon>
     </Compile>
     <Compile Include="IService.cs" />
+    <Compile Include="Models\Ship.cs" />
+    <Compile Include="Models\HitResult.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\ShipMap.cs" />
     <Compile Include="PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

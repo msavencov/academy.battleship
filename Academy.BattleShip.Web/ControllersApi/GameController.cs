@@ -14,12 +14,7 @@ namespace Academy.BattleShip.Web.ControllersApi
         {
             _playerService = playerService;
         }
-
-        [HttpGet]
-        public string Test()
-        {
-            return "dsadasd";
-        }
+        
     }
     
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using Academy.BattleShip.Entity;
-using Academy.BattleShip.Entity.Model;
+using System.Drawing;
+using Academy.BattleShip.Service.Models;
 
 namespace Academy.BattleShip.Service
 {
     public interface IPlayerService : IService
     {
         Player Find(string key);
-        IEnumerable<Player> GetPlayers();
+        Player Register(string name);
+        void UpdateMap(string key, List<Point> cells);
     }
 }

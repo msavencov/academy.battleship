@@ -51,20 +51,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201605311946050_Initial.cs" />
-    <Compile Include="Migrations\201605311946050_Initial.Designer.cs">
-      <DependentUpon>201605311946050_Initial.cs</DependentUpon>
+    <Compile Include="BattleShipEntities.cs" />
+    <Compile Include="Model\KeyPool.cs" />
+    <Compile Include="Migrations\201606041757389_Initial.cs" />
+    <Compile Include="Migrations\201606041757389_Initial.Designer.cs">
+      <DependentUpon>201606041757389_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606041901111_Current1.cs" />
+    <Compile Include="Migrations\201606041901111_Current1.Designer.cs">
+      <DependentUpon>201606041901111_Current1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606041947298_Current2.cs" />
+    <Compile Include="Migrations\201606041947298_Current2.Designer.cs">
+      <DependentUpon>201606041947298_Current2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606081814586_Current3.cs" />
+    <Compile Include="Migrations\201606081814586_Current3.Designer.cs">
+      <DependentUpon>201606081814586_Current3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Admin.cs" />
-    <Compile Include="Model\BattleShipEntities.cs" />
-    <Compile Include="Model\Extensions.cs" />
-    <Compile Include="Model\HitResult.cs" />
-    <Compile Include="Model\GameHits.cs" />
-    <Compile Include="Model\MapShip.cs" />
-    <Compile Include="Model\PlayerGames.cs" />
-    <Compile Include="Model\Players.cs" />
-    <Compile Include="Model\PlayerShips.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\ShipCell.cs" />
   </ItemGroup>
@@ -75,18 +81,20 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605311946050_Initial.resx">
-      <DependentUpon>201605311946050_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606041757389_Initial.resx">
+      <DependentUpon>201606041757389_Initial.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="StoredProcedures\spGameHit.1.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="StoredProcedures\spGameHit.0.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Migrations\201606041901111_Current1.resx">
+      <DependentUpon>201606041901111_Current1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606041947298_Current2.resx">
+      <DependentUpon>201606041947298_Current2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606081814586_Current3.resx">
+      <DependentUpon>201606081814586_Current3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

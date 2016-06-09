@@ -8,11 +8,12 @@ namespace Academy.BattleShip.Entity.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(BattleShipEntities context)
         {
-            context.Admins.AddOrUpdate(t => t.Login, new Admin() {Login = "admin", Password = "123QWEasd"});
+
         }
     }
 }

@@ -1,14 +1,110 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Data.Odbc;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 using Academy.BattleShip.Entity;
 using Academy.BattleShip.Entity.Model;
+using Academy.BattleShip.Service.Models;
+using Player = Academy.BattleShip.Service.Models.Player;
 
 namespace Academy.BattleShip.Service
 {
-    public class PlayerService : IPlayerService
+    public partial class PlayerService : IPlayerService
     {
-        private BattleShipEntities _entities;
+        public Player Find(string key)
+        {
+            if (Player.KeyRegex.Match(key ?? string.Empty).Success == false) return null;
+
+            var x = _entities.Players.Include(t => t.Cells).FirstOrDefault(t => t.Key == key);
+
+            if (x == null) return null;
+
+            var player = new Player
+            {
+                Key = x.Key,
+                Name = x.Name
+            };
+            player.Cells = x.Cells.Select(c => new Point {X = c.X, Y = c.Y});
+
+            return player;
+        }
+
+        public Player Register(string name)
+        {
+            var key = _entities.Keys.Select(t => t.Key)
+                .Except(_entities.Players.Select(t => t.Key))
+                .OrderBy(t => Guid.NewGuid()).FirstOrDefault();
+
+            var player = new Entity.Model.Player
+            {
+                Key = key,
+                Name = name
+            };
+            
+            _entities.Players.Add(player);
+
+            try
+            {
+                _entities.SaveChanges();
+            }
+            catch (DbEntityValidationException exception)
+            {
+                throw new EntityValidationException(exception);
+            }
+
+            return new Player
+            {
+                Key = player.Key,
+                Name = player.Name
+            };
+        }
+
+        /// <summary>
+        /// Verifies and stores the map in the database
+        /// </summary>
+        /// <param name="key">Player secret key</param>
+        /// <param name="cells">Selected ship cells on the map</param>
+        public void UpdateMap(string key, List<Point> cells)
+        {
+            var player = _entities.Players.Include(t=>t.Cells).FirstOrDefault(t => t.Key == key);
+            if (player == null)
+            {
+                throw new KeyNotFoundException("Player with key " + key + " not found.");
+            }
+            var shipMap = new ShipMap();
+            shipMap.ParseShips(cells);
+            shipMap.Validate();
+            
+            var newCells = cells.Select(t => new ShipCell(t.X, t.Y) {PlayerId = player.Id});
+
+            _entities.Cells.RemoveRange(player.Cells);
+            _entities.Cells.AddRange(newCells);
+
+            using (var transaction = _entities.Database.BeginTransaction())
+            {
+                try
+                {
+                    _entities.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (DbEntityValidationException exception)
+                {
+                    transaction.Rollback();
+                    throw new EntityValidationException(exception);
+                }
+            }
+        }
+        
+    }
+
+    public partial class PlayerService
+    {
+        private readonly BattleShipEntities _entities;
 
         public PlayerService(DbContext entities)
         {
@@ -19,15 +115,27 @@ namespace Academy.BattleShip.Service
         {
             _entities.Dispose();
         }
-
-        public Player Find(string key)
+    }
+    
+    public class EntityValidationException : Exception
+    {
+        public DbValidationError[] Errors { get; private set; }
+        public EntityValidationException(DbEntityValidationException exception) : this("See Errors property for details.")
         {
-            return _entities.Players.FirstOrDefault(t => t.SecretKey == key);
+            Errors = exception.EntityValidationErrors.SelectMany(t => t.ValidationErrors).ToArray();
         }
 
-        public IEnumerable<Player> GetPlayers()
+        public EntityValidationException(string message) : base(message)
         {
-            return _entities.Players.AsEnumerable();
+        }
+
+        public EntityValidationException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected EntityValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
+    
 }

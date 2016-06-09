@@ -1,26 +1,26 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Academy.BattleShip.Entity.Model
 {
-    [Table("ShipCell")]
-    public partial class ShipCell
+    public class ShipCell
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Column("Id")]
+        public ShipCell() {}
+
+        public ShipCell(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int PlayerId { get; set; }
 
-        [Column("ShipId")]
-        public int ShipId { get; set; }
-
-        [Column("X_Pos")]
-        public byte? X { get; set; }
-
-        [Column("Y_Pos")]
-        public byte? Y { get; set; }
-
-        public virtual ICollection<GameHit> GameHits { get; set; } = new HashSet<GameHit>();
-
-        public virtual MapShip MapShip { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        
+        [ForeignKey(nameof(PlayerId))]
+        public virtual Player Player { get; set; }
     }
 }

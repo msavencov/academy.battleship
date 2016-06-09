@@ -1,5 +1,53 @@
-﻿@{
-    ViewBag.Title = "Home";
+﻿@using Newtonsoft.Json
+@model Academy.BattleShip.Web.Models.RegisterModel
+
+@{
+    var playerModel = JsonConvert.SerializeObject(Model);
 }
 
-<h1>sdasdasd</h1>
+<form method="POST" action="@Url.Action("Index", new {key = Model.Key})" class="container-fluid" autocomplete="off"
+      ng-app="BattleShipApp"
+      ng-controller="PlayerRegisterController">
+
+    <div class="col-md-2 sidebar">
+
+        <div class="form-group">
+            <label>PlayerName</label>
+            <input name="@Html.NameFor(t=>t.Name)" type="text" class="form-control" placeholder="Player Name" ng-model="model.Name">
+        </div>
+        <div class="form-group">
+            <label>Secret Key</label>
+            <input name="@Html.NameFor(t=>t.Key)" type="text" class="form-control" placeholder="Secret Key" ng-model="model.Key" readonly="readonly">
+        </div>
+        <button type="button" class="btn btn-default" ng-click="reset();">Reset</button>
+        @{ var bt = Academy.BattleShip.Service.Models.Player.KeyRegex.Match(Model.Key ?? string.Empty).Success ? "Save" : "Register";}
+        <button type="submit" class="btn btn-default">@bt</button>
+    </div>
+    <div class="col-md-10" id="map">
+        @Html.ValidationSummary()
+        <div class="col-xs-offset-1" ng-repeat="columns in model.ShipMap track by $index" ng-data="{{y = $index}}">
+            <div class="box col-xs-1" ng-repeat="column in columns track by $index"
+                 ng-data="{{x = $index}}"
+                 ng-class="{ selected: model.ShipMap[x][y]}"
+                 ng-click="toggle(x, y)">
+                <input type="hidden" name="ShipMap[{{x}}][{{y}}]" value="{{model.ShipMap[x][y]}}"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</form>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var playerModel = JSON.parse('@Html.Raw(playerModel)');
+        
+        $(document).ready(function () {
+            var height = $(window).height() - $("#map").position().top - 25;
+            var size = (height / 10) - 2;
+            $(".box").css("width", size);
+            $(".box").css("height", size);
+        });
+    </script>
+}

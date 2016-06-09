@@ -1,11 +1,18 @@
-﻿using Academy.BattleShip.Entity;
-using Academy.BattleShip.Entity.Model;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Academy.BattleShip.Service.Models;
 
 namespace Academy.BattleShip.Service
 {
     public interface IGameService : IService
     {
-        HitResult Hit(string key, int player, short x, short y);
-        HitResult UploadMap(string key, bool[][] map);
+        int NewGame(int playerId);
+        HitResult Hit(int gameId, int x, int y);
+    }
+
+    public class Game
+    {
+        public int Player { get; set; }
+        public int Type { get; set; }
     }
 }

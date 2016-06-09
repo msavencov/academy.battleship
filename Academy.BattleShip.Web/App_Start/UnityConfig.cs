@@ -1,10 +1,12 @@
 using System;
 using System.Data.Entity;
+using Academy.BattleShip.Entity;
 using Academy.BattleShip.Entity.Model;
 using Academy.BattleShip.Service;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 
-namespace Academy.BattleShip.Web
+namespace Academy.BattleShip.Web.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -12,7 +14,7 @@ namespace Academy.BattleShip.Web
     public class UnityConfig
     {
         #region Unity Container
-        private static Lazy<IUnityContainer> _container = new Lazy<IUnityContainer>(() =>
+        private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
         {
             var container = new UnityContainer();
             RegisterTypes(container);
@@ -24,7 +26,7 @@ namespace Academy.BattleShip.Web
         /// </summary>
         public static IUnityContainer GetConfiguredContainer()
         {
-            return _container.Value;
+            return container.Value;
         }
         #endregion
 
@@ -36,6 +38,11 @@ namespace Academy.BattleShip.Web
         {
             container.RegisterType<DbContext, BattleShipEntities>(new PerRequestLifetimeManager());
             container.RegisterType<IPlayerService, PlayerService>(new PerRequestLifetimeManager());
+            // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
+            // container.LoadConfiguration();
+
+            // TODO: Register your types here
+            // container.RegisterType<IProductRepository, ProductRepository>();
         }
     }
 }
