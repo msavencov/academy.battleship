@@ -3,6 +3,7 @@ using System.Data.Entity;
 using Academy.BattleShip.Entity;
 using Academy.BattleShip.Entity.Model;
 using Academy.BattleShip.Service;
+using Academy.BattleShip.Service.Services;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Academy.BattleShip.Service;
 using Academy.BattleShip.Service.Models;
-using Academy.BattleShip.Web.Classes;
+using Academy.BattleShip.Service.Services;
 using Academy.BattleShip.Web.Models;
 
 namespace Academy.BattleShip.Web.Controllers
