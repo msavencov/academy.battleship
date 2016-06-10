@@ -19,12 +19,24 @@ namespace Academy.BattleShip.Web.Controllers
             key = string.IsNullOrEmpty(key) ? string.Empty : key;
 
             var model = new RegisterModel();
-            var player = _playerService.Find(key);
+            Player player = null;
 
-            model.Key = player?.Key ?? string.Empty;
-            model.Name = player?.Name;
-            model.Init(player?.Cells?.ToList() ?? new List<Point>());
+            try
+            {
+                player = _playerService.Find(key);
+            }
+            catch (PlayerNotFoundException exception)
+            {
+                ModelState.AddModelError(string.Empty, exception);
+            }
 
+            if (ModelState.IsValid)
+            {
+                model.Key = player?.Key ?? string.Empty;
+                model.Name = player?.Name;
+                model.Init(player?.Cells?.ToList() ?? new List<Point>());
+            }
+            
             if (player == null && Player.KeyRegex.Match(key).Success)
             {
                 ModelState.AddModelError(string.Empty, "Player with key: " + key + " not found.");
@@ -36,17 +48,26 @@ namespace Academy.BattleShip.Web.Controllers
         [HttpPost]
         public ActionResult Index(RegisterModel model)
         {
-            var player = new Player();
+            Player player = null;
+
             try
             {
-                player = _playerService.Find(model.Key) ?? _playerService.Register(model.Name);
-                model.Key = player.Key;
+                player = _playerService.Find(model.Key);
             }
-            catch (EntityValidationException exception)
+            catch (EntityValidationException)
             {
-                _addValidationErrors(exception);
+                try
+                {
+                    player = _playerService.Register(model.Name);
+                }
+                catch (EntityValidationException exception)
+                {
+                    _addValidationErrors(exception);
+                }
             }
 
+            if (player == null) return View(model);
+            
             if (ModelState.IsValid)
             {
                 var cells = new List<Point>();

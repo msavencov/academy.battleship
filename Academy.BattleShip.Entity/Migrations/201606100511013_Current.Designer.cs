@@ -7,13 +7,13 @@ namespace Academy.BattleShip.Entity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Current1 : IMigrationMetadata
+    public sealed partial class Current : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Current1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Current));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606041947298_Current1"; }
+            get { return "201606100511013_Current"; }
         }
         
         string IMigrationMetadata.Source

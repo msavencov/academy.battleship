@@ -18,9 +18,12 @@ namespace Academy.BattleShip.Service.Services
         {
             if (Player.KeyRegex.Match(key ?? string.Empty).Success == false) return null;
 
-            var x = _entities.Players.Include(t => t.Cells).FirstOrDefault(t => t.Key == key);
+            var x = _entities.Players.FirstOrDefault(t => t.Key == key);
 
-            if (x == null) return null;
+            if (x == null)
+            {
+                throw new PlayerNotFoundException("Player with key '"+ key +"' not found.");
+            }
 
             var player = new Player
             {
@@ -98,6 +101,14 @@ namespace Academy.BattleShip.Service.Services
             }
         }
         
+    }
+
+    public class PlayerNotFoundException : Exception
+    {
+        public PlayerNotFoundException(string message) : base(message)
+        {
+            
+        }
     }
 
     public partial class PlayerService

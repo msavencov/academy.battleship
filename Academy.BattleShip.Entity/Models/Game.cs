@@ -17,7 +17,9 @@ namespace Academy.BattleShip.Entity.Models
 
         public bool Completed { get; set; }
 
+        [ForeignKey(nameof(PlayerId1))]
         public virtual Player Player1 { get; set; }
+        [ForeignKey(nameof(PlayerId2))]
         public virtual Player Player2 { get; set; }
     }
 }
