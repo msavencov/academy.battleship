@@ -19,5 +19,7 @@ namespace Academy.BattleShip.Entity.Models
 
         [ForeignKey(nameof(GameId))]
         public Game Game { get; set; }
+
+        public const int MaxValue = 1000;
     }
 }

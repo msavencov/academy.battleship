@@ -19,6 +19,7 @@ namespace Academy.BattleShip.Web.App_Start
             js.Include("~/bower_components/jquery/dist/jquery.min.js");
             js.Include("~/bower_components/bootstrap/dist/js/bootstrap.min.js");
             js.Include("~/bower_components/angular/angular.js");
+            js.Include("~/bower_components/angular-animate/angular-animate.js");
 
             js.Include("~/App/*.js");
             js.Include("~/App/controllers/*.js");

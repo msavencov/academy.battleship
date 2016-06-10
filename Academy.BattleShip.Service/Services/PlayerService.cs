@@ -83,8 +83,8 @@ namespace Academy.BattleShip.Service.Services
             
             var newCells = cells.Select(t => new ShipCell(t.X, t.Y) {PlayerId = player.Id});
 
-            _entities.Cells.RemoveRange(player.Cells);
-            _entities.Cells.AddRange(newCells);
+            _entities.ShipCells.RemoveRange(player.Cells);
+            _entities.ShipCells.AddRange(newCells);
 
             using (var transaction = _entities.Database.BeginTransaction())
             {

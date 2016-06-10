@@ -12,9 +12,10 @@ namespace Academy.BattleShip.Entity
         public BattleShipEntities() : base("BattleShipEntities") {}
         
         public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<ShipCell> Cells { get; set; }
+        public virtual DbSet<ShipCell> ShipCells { get; set; }
         public virtual DbSet<KeyPool> Keys { get; set; }
         public virtual DbSet<Game> Games { get; set; }
+        public virtual DbSet<GameHit> GameHits { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

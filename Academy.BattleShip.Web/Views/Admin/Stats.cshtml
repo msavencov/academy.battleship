@@ -1,1 +1,24 @@
-﻿<img src="~/Content/Images/Coming-Soon.png" alt="Coming Soon :)"/>
+﻿
+
+<div class="container-fluid" ng-app="BattleShipApp" ng-controller="AllGamesStatsController">
+    <div class="col-xs-4">
+        <table class="table table-responsive" style="width: 100%" ng-hide="loading">
+            <tr>
+                <th>Player</th>
+                <th>Games</th>
+                <th>Total Hits</th>
+                <th>Ship Hits</th>
+                <th>Rating</th>
+            </tr>
+            <tr ng-repeat="item in data | orderBy:'-Rating'" >
+                <td>{{item.Player}}</td>
+                <td>{{item.Games}}</td>
+                <td>{{item.TotalHits}}</td>
+                <td>{{item.Hits}}</td>
+                <td>{{item.Rating | number:4}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-xs-8"></div>
+</div>
+

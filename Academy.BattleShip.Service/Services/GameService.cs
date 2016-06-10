@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Academy.BattleShip.Entity;
@@ -98,7 +99,7 @@ namespace Academy.BattleShip.Service.Services
             var result= new HitResult();
             result.Hit = game.Player2.Cells.Any(t => t.X == x && t.Y == y);
 
-            if (game.GameHits.Count() == 100)
+            if (game.GameHits.Count() == GameHit.MaxValue)
             {
                 result.Completed = true;
                 game.Completed = true;
@@ -107,7 +108,50 @@ namespace Academy.BattleShip.Service.Services
 
             return result;
         }
-        
+
+        public GameStats GameStats(Guid gameId)
+        {
+            return _gameStatsQueryable().FirstOrDefault(t => t.GameId == gameId);
+        }
+
+        public List<GameStats> GameStats(string playerKey)
+        {
+            var query = from s in _gameStatsQueryable()
+                        join g in _entities.Games on s.GameId equals g.Id
+                        join p in _entities.Players on g.PlayerId1 equals p.Id
+                        where p.Key == playerKey
+                        select s;
+            return query.ToList();
+        }
+
+        public List<GameStats> GameStats()
+        {
+            return _gameStatsQueryable().ToList();
+        }
+
+        private IQueryable<GameStats> _gameStatsQueryable()
+        {
+            // ReSharper disable once ReplaceWithSingleCallToCount 
+            var query = from g in _entities.Games
+                        join p1 in _entities.Players on g.PlayerId1 equals p1.Id
+                        join p2 in _entities.Players on g.PlayerId2 equals p2.Id
+                        join gh in _entities.GameHits on g.Id equals gh.GameId into gameHits
+                        join mc in _entities.ShipCells on g.PlayerId2 equals mc.PlayerId into mapCells
+                        let hits = gameHits.Select(t => new { t.X, t.Y })
+                                           .Distinct()
+                                           .Where(t => mapCells.Any(c => c.X == t.X && c.Y == t.Y))
+                                           .Count()
+                        select new GameStats()
+                        {
+                            Player1 = p1.Name,
+                            Player2 = p2.Name,
+                            Completed = g.Completed,
+                            GameId = g.Id,
+                            TotalHits = gameHits.Count(),
+                            Hits = hits
+                        };
+            return query;
+        }
     }
 
 

@@ -1,3 +1,3 @@
 ﻿"use strict";
 
-var BattleShipApp = angular.module('BattleShipApp', []);
+var BattleShipApp = angular.module("BattleShipApp", ["ngAnimate"]);

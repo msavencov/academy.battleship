@@ -56,6 +56,7 @@
     <Compile Include="Exceptions\EntityValidationException.cs" />
     <Compile Include="Exceptions\GameNotFoundException.cs" />
     <Compile Include="Services\GameService.cs" />
+    <Compile Include="Models\GameStats.cs" />
     <Compile Include="Services\IGameService.cs">
       <DependentUpon>GameService.cs</DependentUpon>
     </Compile>
