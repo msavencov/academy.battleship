@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Academy.BattleShip.Web.Areas.Api.Filters;
 
 namespace Academy.BattleShip.Web
 {
@@ -22,6 +23,8 @@ namespace Academy.BattleShip.Web
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
             config.Formatters.Add(new XmlMediaTypeFormatter());
+
+            config.Filters.Add(new GlobalExceptionFilterAttribute());
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web.Mvc;
 using Academy.BattleShip.Service;
+using Academy.BattleShip.Service.Exceptions;
 using Academy.BattleShip.Service.Models;
 using Academy.BattleShip.Service.Services;
 using Academy.BattleShip.Web.Models;

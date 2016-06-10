@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http.ModelBinding;
 using Academy.BattleShip.Service;
+using Academy.BattleShip.Service.Exceptions;
 using Academy.BattleShip.Service.Services;
 
 namespace Academy.BattleShip.Web.Infrastructure

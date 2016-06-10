@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Serialization;
 using Academy.BattleShip.Entity;
 using Academy.BattleShip.Entity.Models;
+using Academy.BattleShip.Service.Exceptions;
 using Academy.BattleShip.Service.Models;
 using Player = Academy.BattleShip.Service.Models.Player;
 
@@ -103,14 +103,6 @@ namespace Academy.BattleShip.Service.Services
         
     }
 
-    public class PlayerNotFoundException : Exception
-    {
-        public PlayerNotFoundException(string message) : base(message)
-        {
-            
-        }
-    }
-
     public partial class PlayerService
     {
         private readonly BattleShipEntities _entities;
@@ -125,26 +117,4 @@ namespace Academy.BattleShip.Service.Services
             _entities.Dispose();
         }
     }
-    
-    public class EntityValidationException : Exception
-    {
-        public DbValidationError[] Errors { get; private set; }
-        public EntityValidationException(DbEntityValidationException exception) : this("See Errors property for details.")
-        {
-            Errors = exception.EntityValidationErrors.SelectMany(t => t.ValidationErrors).ToArray();
-        }
-
-        public EntityValidationException(string message) : base(message)
-        {
-        }
-
-        public EntityValidationException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected EntityValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
-    
 }

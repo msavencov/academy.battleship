@@ -325,6 +325,9 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Models\HitModel.cs" />
+    <Compile Include="Areas\Api\Filters\GlobalExceptionFilterAttribute.cs" />
+    <Compile Include="Areas\Api\Models\ApiResponseMessage.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -518,7 +521,6 @@
     <Folder Include="App\modules\" />
     <Folder Include="App\services\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>

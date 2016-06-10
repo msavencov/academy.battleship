@@ -18,7 +18,7 @@ namespace Academy.BattleShip.Web.Models
                 var row = new List<bool>();
                 for (int j = 0; j < 10; j++)
                 {
-                    row.Add(cells.Exists(t=>t.X == j && t.Y == i));
+                    row.Add(cells.Exists(t=>t.X == i && t.Y == j));
                 }
                 ShipMap.Add(row);
             }

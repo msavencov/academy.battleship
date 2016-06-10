@@ -52,11 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleShipEntities.cs" />
-    <Compile Include="Migrations\201606100511013_Current.cs" />
-    <Compile Include="Migrations\201606100511013_Current.Designer.cs">
-      <DependentUpon>201606100511013_Current.cs</DependentUpon>
+    <Compile Include="Migrations\201606101236264_Current.cs" />
+    <Compile Include="Migrations\201606101236264_Current.Designer.cs">
+      <DependentUpon>201606101236264_Current.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606101238022_Current1.cs" />
+    <Compile Include="Migrations\201606101238022_Current1.Designer.cs">
+      <DependentUpon>201606101238022_Current1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameHit.cs" />
     <Compile Include="Models\KeyPool.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Player.cs" />
@@ -71,8 +76,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606100511013_Current.resx">
-      <DependentUpon>201606100511013_Current.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606101236264_Current.resx">
+      <DependentUpon>201606101236264_Current.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606101238022_Current1.resx">
+      <DependentUpon>201606101238022_Current1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

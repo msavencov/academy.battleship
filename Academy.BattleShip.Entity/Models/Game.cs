@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ namespace Academy.BattleShip.Entity.Models
 {
     public class Game
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Index("IX_PlayerId1PlayerId2", Order = 1, IsUnique = true)]
@@ -21,5 +22,7 @@ namespace Academy.BattleShip.Entity.Models
         public virtual Player Player1 { get; set; }
         [ForeignKey(nameof(PlayerId2))]
         public virtual Player Player2 { get; set; }
+
+        public virtual ICollection<GameHit> GameHits { get; set; } = new HashSet<GameHit>();
     }
 }

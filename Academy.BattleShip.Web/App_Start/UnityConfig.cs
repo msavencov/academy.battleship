@@ -37,7 +37,8 @@ namespace Academy.BattleShip.Web.App_Start
         public static void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<DbContext, BattleShipEntities>(new PerRequestLifetimeManager());
-            container.RegisterType<IPlayerService, PlayerService>(new PerRequestLifetimeManager());
+            container.RegisterType<IPlayerService, PlayerService>();
+            container.RegisterType<IGameService, GameService>();
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 

@@ -21,6 +21,7 @@ namespace Academy.BattleShip.Entity
             modelBuilder.Entity<Game>().HasRequired(t=>t.Player1).WithMany(t=>t.MyGames).WillCascadeOnDelete(false);
             modelBuilder.Entity<Game>().HasRequired(t=>t.Player2).WithMany(t=>t.OpponentGames).WillCascadeOnDelete(false);
             modelBuilder.Entity<ShipCell>().HasRequired(t=>t.Player).WithMany(t=>t.Cells).WillCascadeOnDelete(false);
+            modelBuilder.Entity<GameHit>().HasRequired(t=>t.Game).WithMany(t=>t.GameHits).WillCascadeOnDelete(false);
         }
     }
 }

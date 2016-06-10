@@ -42,6 +42,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\EntityValidationException.cs" />
+    <Compile Include="Exceptions\GameNotFoundException.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\IGameService.cs">
       <DependentUpon>GameService.cs</DependentUpon>
@@ -62,6 +67,8 @@
     <Compile Include="Models\HitResult.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ShipMap.cs" />
+    <Compile Include="Exceptions\NoMoreGamesException.cs" />
+    <Compile Include="Exceptions\PlayerNotFoundException.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +82,7 @@
       <Name>Academy.BattleShip.Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
