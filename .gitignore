@@ -237,3 +237,4 @@ _Pvt_Extensions
 */bower_components/*
 !*/bower_components/placeholder
 ConsoleApplication*
+Deployment/*
