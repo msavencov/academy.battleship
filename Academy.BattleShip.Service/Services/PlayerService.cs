@@ -75,6 +75,12 @@ namespace Academy.BattleShip.Service.Services
             {
                 throw new KeyNotFoundException("Player with key " + key + " not found.");
             }
+
+            if (player.MapValidated)
+            {
+                throw new EntityValidationException("Map changes are not allowed.");
+            }
+
             var shipMap = new ShipMap();
             shipMap.ParseShips(cells);
             shipMap.Validate();
