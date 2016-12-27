@@ -2,6 +2,7 @@
   "name": "academy-battleship",
   "private": true,
   "dependencies": {
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "angular-animate": "1.6.1"
   }
 }
