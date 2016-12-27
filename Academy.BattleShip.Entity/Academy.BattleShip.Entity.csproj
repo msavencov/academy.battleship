@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201606101238022_Current1.Designer.cs">
       <DependentUpon>201606101238022_Current1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612271232581_Current2.cs" />
+    <Compile Include="Migrations\201612271232581_Current2.Designer.cs">
+      <DependentUpon>201612271232581_Current2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameHit.cs" />
     <Compile Include="Models\KeyPool.cs" />
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606101238022_Current1.resx">
       <DependentUpon>201606101238022_Current1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612271232581_Current2.resx">
+      <DependentUpon>201612271232581_Current2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

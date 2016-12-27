@@ -14,7 +14,9 @@ namespace Academy.BattleShip.Entity.Models
 
         [Required, StringLength(6, MinimumLength = 6)]
         public string Key { get; set; }
-        
+
+        public bool MapValidated { get; set; }
+
         public virtual ICollection<ShipCell> Cells { get; set; } = new HashSet<ShipCell>();
         public virtual ICollection<Game> MyGames { get; set; } = new HashSet<Game>();
         public virtual ICollection<Game> OpponentGames { get; set; } = new HashSet<Game>();
