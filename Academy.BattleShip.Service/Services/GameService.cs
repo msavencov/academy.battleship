@@ -19,6 +19,11 @@ namespace Academy.BattleShip.Service.Services
                 throw new PlayerNotFoundException("Player with key '" + playerKey + "' not found.");
             }
 
+            if (player.MapValidated == false)
+            {
+                throw new Exception($"You have some invalid ship positions. Go to: http://hostname/?key={player.Key} and fix all errors.");
+            }
+
             foreach (var game in player.MyGames.Where(t=>t.Completed == false))
             {
                 game.Completed = true;
@@ -27,7 +32,7 @@ namespace Academy.BattleShip.Service.Services
             var query = from p1 in _entities.Players
                         from p2 in _entities.Players
                         join g in _entities.Games on new {p1 = p1.Id, p2 = p2.Id} equals new {p1 = g.PlayerId1, p2 = g.PlayerId2} into games
-                        where p1.Id == player.Id && p1.Id != p2.Id && games.Any() == false
+                        where p1.Id == player.Id && p1.Id != p2.Id && games.Any() == false && p2.MapValidated
                         select p2.Id;
 
             var newPlayerId = query.FirstOrDefault();

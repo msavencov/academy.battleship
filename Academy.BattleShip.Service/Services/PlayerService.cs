@@ -16,21 +16,19 @@ namespace Academy.BattleShip.Service.Services
     {
         public Player Find(string key)
         {
-            if (Player.KeyRegex.Match(key ?? string.Empty).Success == false) return null;
+            var dbPlayer = _entities.Players.FirstOrDefault(t => t.Key == key);
 
-            var x = _entities.Players.FirstOrDefault(t => t.Key == key);
-
-            if (x == null)
+            if (dbPlayer == null)
             {
                 throw new PlayerNotFoundException("Player with key '"+ key +"' not found.");
             }
 
             var player = new Player
             {
-                Key = x.Key,
-                Name = x.Name
+                Key = dbPlayer.Key,
+                Name = dbPlayer.Name
             };
-            player.Cells = x.Cells.Select(c => new Point {X = c.X, Y = c.Y});
+            player.Cells = dbPlayer.Cells.Select(c => new Point {X = c.X, Y = c.Y});
 
             return player;
         }
@@ -80,7 +78,9 @@ namespace Academy.BattleShip.Service.Services
             var shipMap = new ShipMap();
             shipMap.ParseShips(cells);
             shipMap.Validate();
-            
+
+            player.MapValidated = true;
+
             var newCells = cells.Select(t => new ShipCell(t.X, t.Y) {PlayerId = player.Id});
 
             _entities.ShipCells.RemoveRange(player.Cells);

@@ -521,6 +521,7 @@
     <None Include="Properties\PublishProfiles\e365aab7-0ee0-4-231-b9ee - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\e365aab7-0ee0-4-231-b9ee - Web Deploy.pubxml" />
     <Content Include="Views\Admin\Stats.cshtml" />
+    <None Include="Properties\PublishProfiles\local-release.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

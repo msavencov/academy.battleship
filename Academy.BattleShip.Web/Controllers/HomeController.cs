@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 using Academy.BattleShip.Service;
 using Academy.BattleShip.Service.Exceptions;
@@ -14,7 +15,7 @@ namespace Academy.BattleShip.Web.Controllers
 {
     public partial class HomeController
     {
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Index(string key)
         {
             key = string.IsNullOrEmpty(key) ? string.Empty : key;
@@ -25,17 +26,13 @@ namespace Academy.BattleShip.Web.Controllers
             try
             {
                 player = _playerService.Find(key);
+                model.Key = player.Key;
+                model.Name = player.Name;
+                model.Init(player.Cells.ToList());
             }
             catch (PlayerNotFoundException exception)
             {
-                ModelState.AddModelError(string.Empty, exception);
-            }
-
-            if (ModelState.IsValid)
-            {
-                model.Key = player?.Key ?? string.Empty;
-                model.Name = player?.Name;
-                model.Init(player?.Cells?.ToList() ?? new List<Point>());
+                model.Init(new List<Point>());
             }
             
             if (player == null && Player.KeyRegex.Match(key).Success)
@@ -46,20 +43,21 @@ namespace Academy.BattleShip.Web.Controllers
             return View(model);
         }
         
-        [HttpPost]
-        public ActionResult Index(RegisterModel model)
+        [System.Web.Http.HttpPost]
+        public ActionResult Index([FromBody] RegisterModel model)
         {
             Player player = null;
-
+            
             try
             {
                 player = _playerService.Find(model.Key);
             }
-            catch (EntityValidationException)
+            catch (PlayerNotFoundException)
             {
                 try
                 {
                     player = _playerService.Register(model.Name);
+                    model.Key = player.Key;
                 }
                 catch (EntityValidationException exception)
                 {
@@ -67,7 +65,10 @@ namespace Academy.BattleShip.Web.Controllers
                 }
             }
 
-            if (player == null) return View(model);
+            if (player == null)
+            {
+                return View(model);
+            }
             
             if (ModelState.IsValid)
             {
